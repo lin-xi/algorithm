@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+h3 {
+  background: #f0f0f0;
+  padding: 10px;
+}
+#app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#app .left {
+  background-color: #f0f0f0;
+  flex: 0 0 200px;
+}
+#app .left h3 {
+  background-color: coral;
+  padding: 10px;
+}
+#app .left li {
+  padding: 5px;
+}
+#app .left li:hover {
+  background-color: lightcoral;
+  cursor: pointer;
+}
+#app .right {
+  flex: 1;
+  min-height: 100%;
+}
+#app .right .array-item {
+  display: inline-block;
+  border: 1px #eee solid;
+  padding: 10px;
+  margin: 5px;
+  background: #ddd;
+}
+#app .right .source {
+  padding: 10px;
+  display: flex;
+}
+
+
+/*# sourceMappingURL=/main.c39d6dcf.css.map */

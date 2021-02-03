@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>mergeSort</title>
+  <link rel="stylesheet" type="text/css" href="./page.less">
+</head>
+
+<body>
+  <h1>归并排序</h1>
+  <ul>
+    <h3>归并排序是建立在归并操作上的一种有效的排序算法。该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。</h3>
+    <li> 首先考虑下如何将将二个有序数列合并</li>
+    <li> 这个非常简单，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可</li>
+    <li> 解决了上面的合并有序数列问题，再来看归并排序，其的基本思路就是将数组分成二组A，B，如果这二组组内的数据都是有序的，那么就可以很方便的将这二组数据进行排序。如何让这二组组内数据有序了？ 可以将A，B组各自再分成二组。依次类推，当分出来的小组只有一个数据时，可以认为这个小组组内已经达到了有序，然后再合并相邻的二个小组就可以了。这样通过先递归的分解数列，再合并数列就完成了归并排序。
+    </li>
+  </ul>
+  <h2>非递归</h2>
+  <pre>
+    <code>
+    function mergeSort(arr: Array<number>): [Array<number>, number] {
+      let cnt: number = 0
+      let len = arr.length
+      let gap = 1;
+
+      while (gap < len) {
+        cnt++    //计数
+        for (let i: number = 0; i < len; i += 2 * gap) {
+          cnt++     //计数
+          for (let left: number = i; left < i + gap; left++) {
+            let right = i + gap
+            cnt++    //计数
+            if (arr[left] > arr[right]) {
+              [arr[left], arr[right]] = [arr[right], arr[left]]
+              let m: number = right
+              while (m < right + gap - 1 && arr[m] > arr[m + 1]) {
+                cnt++    //计数
+                [arr[m], arr[m + 1]] = [arr[m + 1], arr[m]]
+                m++
+              }
+            }
+          }
+        }
+        gap *= 2
+      }
+
+      return [arr, cnt]
+    }
+    </code>
+  </pre>
+
+  <h2>递归</h2>
+  <pre>
+    <code>
+    function mergeSort2(arr: Array<number>): Array<number> {
+      let cnt: number = 0
+      let result: Array<number> = []
+    
+      if (arr.length < 2) {
+        return arr
+      } else {
+        let middle = Math.floor(arr.length / 2)
+        let left: Array<number> = arr.slice(0, middle)
+        let right: Array<number> = arr.slice(middle)
+        result = merge(mergeSort2(left), mergeSort2(right))
+        console.log(result)
+        return result
+      }
+    }
+      
+    function merge(left: Array<number>, right: Array<number>) {
+      let result: Array<number> = []
+      let i: number = 0;
+      let j: number = 0;
+      while (left.length > 0 && right.length > 0) {
+        if (left[0] < right[0]) {
+          result.push(left.shift())
+        } else {
+          result.push(right.shift())
+        }
+      }
+      return result.concat(left).concat(right)
+    }
+    </code>
+  </pre>
+
+  <div class="playground">
+    <div class="edit">
+      <p>输入：</p>
+      <textarea id="input">5,39,9,32,20,25,18,3,40,23,45,26,16,1,44,0,46,33,2,28,49,24,15,31,41,27,38,6,47,14,12,36,11,7,21,42,19,9,50,34,48,37,10,22,13,4,8,17,29,30,43,35</textarea>
+      <a class="button">100000次 排序</a>
+    </div>
+    <div class="view">
+      <div>
+        <p>结果：</p>
+        <textarea id="result"></textarea>
+      </div>
+      <div>
+        耗时：
+        <span id="time"></span>
+        循环次数：
+        <span id="count"></span>
+      </div>
+    </div>
+  </div>
+  <script src="./mergeSort.ts"></script>
+  <script type="text/javascript">
+
+    document.querySelector('.button').addEventListener('click', () => {
+      let start = Date.now()
+      let result;
+
+      for (let i = 0; i < 1; i++) {
+        let arr = document.querySelector('#input').value.split(',')
+        arr = arr.map(item => {
+          return parseInt(item)
+        })
+        result = window.mergeSort(arr)
+      }
+      document.querySelector('#result').innerText = result[0].join(',')
+      document.querySelector('#time').innerText = (Date.now() - start) / 100000
+      document.querySelector('#count').innerText = result[1]
+
+    })
+  </script>
+
+</body>
+
+</html>

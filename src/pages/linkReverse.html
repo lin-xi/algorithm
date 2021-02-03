@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>bubbleSort</title>
+  <link rel="stylesheet" type="text/css" href="./page.less">
+</head>
+
+<body>
+  <h1>冒泡排序</h1>
+  <ul>
+    <h3>冒泡排序算法的运作如下：</h3>
+    <li> 比较相邻的元素，如果前一个比后一个大，就把它们两个调换位置。</li>
+    <li> 对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</li>
+    <li> 针对所有的元素重复以上的步骤，除了最后一个。</li>
+    <li> 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+  </ul>
+  <pre>
+    <code>
+    function bubbleSort(arr: Array<number>): [Array<number>, number] {
+      let cnt: number = 0
+      for (let i: number = arr.length - 1; i > 0; i--) {
+        cnt++;
+        for (let j: number = 0; j < i; j++) {
+          cnt++;
+          if (arr[j] > arr[j + 1]) {
+            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+          }
+        }
+      }
+      return [arr, cnt]
+    }
+    </code>
+  </pre>
+  <div class="playground">
+    <div class="edit">
+      <p>输入：</p>
+      <textarea id="input">5,39,9,32,20,25,18,3,40,23,45,26,16,1,44,0,46,33,2,28,49,24,15,31,41,27,38,6,47,14,12,36,11,7,21,42,19,9,50,34,48,37,10,22,13,4,8,17,29,30,43,35</textarea>
+      <a class="button">100000次 排序</a>
+    </div>
+    <div class="view">
+      <div>
+        <p>结果：</p>
+        <textarea id="result"></textarea>
+      </div>
+      <div>
+        耗时：
+        <span id="time"></span>
+        循环次数：
+        <span id="count"></span>
+      </div>
+    </div>
+  </div>
+  <script src="./bubbleSort.ts"></script>
+  <script type="text/javascript">
+
+    document.querySelector('.button').addEventListener('click', () => {
+      let start = Date.now()
+      let result;
+
+      for (let i = 0; i < 100000; i++) {
+        let arr = document.querySelector('#input').value.split(',')
+        arr = arr.map(item => {
+          return parseInt(item)
+        })
+        result = window.bubbleSort(arr)
+      }
+      document.querySelector('#result').innerText = result[0].join(',')
+      document.querySelector('#time').innerText = (Date.now() - start) / 100000
+      document.querySelector('#count').innerText = result[1]
+
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <meta content="email=no" name="format-detection">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>Algorithm</title>
+  <style>
+    #gz {
+      font-size: 14px;
+      padding: 26px;
+    }
+
+    #gz .text {
+      line-height: 1.5;
+    }
+
+    #gz span {
+      text-decoration: underline;
+    }
+
+    #gz table {
+      border-collapse: collapse;
+      border: 1px #000 solid;
+      width: 655px;
+    }
+
+    #gz td {
+      padding-left: 8px;
+      border: 1px #000 solid;
+    }
+
+    #gz .p8 {
+      padding: 8px;
+    }
+
+    #gz .w1 {
+      width: 115px;
+    }
+
+    #gz .w2 {
+      width: 170px;
+    }
+
+    #gz .w3 {
+      width: 140px;
+    }
+
+    #gz .yellow {
+      background-color: yellow;
+      font-weight: bold;
+    }
+
+    #gz .red {
+      color: red
+    }
+
+    #gz .bold {
+      font-weight: bold;
+    }
+
+    #gz .center {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="gz">
+    <div class="text">
+      <span>E075673 林溪</span>，您好！
+      <br> 您的2018年02月工资单如下，请查收。
+      <br>如对年终奖有疑问，请详见另一邮件“2017年年终奖沟通信”
+      <br>如对月度绩效有疑问，请联系自己的上级；
+      <br>其他疑问，请
+      <b>写明员工编号</b>、
+      <b>姓名</b>发邮件至
+      <a href="email:XD-myhr@ele.me">XD-myhr@ele.me</a>，HR将在2个工作日内回复您。
+      <br>工资日常问题Q&A、工资条你看懂了吗：
+      <a href="email:XD-Finance@ele.me">http://family.waimai.baidu.com/pages/subject/7</a>
+    </div>
+
+    <table border="1" cellpadding="1" cellspacing="0">
+      <tr>
+        <td colspan="4" class="p8 yellow">工资汇总</td>
+      </tr>
+      <tr>
+        <td class="bold p8 w1">应发工资</td>
+        <td class="bold center p8 w2 v1 b0"></td>
+        <td class="bold red w3 p8">实发工资</td>
+        <td class="center p8 red bold v0"></td>
+      </tr>
+      <tr>
+        <td class="bold yellow">收入项目</td>
+        <td class="bold yellow center">金额</td>
+        <td class="bold yellow">法定扣减项目</td>
+        <td class="bold yellow center">金额</td>
+      </tr>
+      <tr>
+        <td>固定工资实发</td>
+        <td class="center b1">41297.14</td>
+        <td>养老保险-个人部分</td>
+        <td class="center v2">1849.44</td>
+      </tr>
+      <tr>
+        <td>月绩效奖金</td>
+        <td class="center">0</td>
+        <td>失业保险-个人部分</td>
+        <td class="center v3">46.24</td>
+      </tr>
+      <tr>
+        <td>差旅补助</td>
+        <td class="center">900</td>
+        <td>医疗保险-个人部分</td>
+        <td class="center v4">465.36</td>
+      </tr>
+      <tr>
+        <td>午餐补助</td>
+        <td class="center b2">440</td>
+        <td>住房公积金-个人部分</td>
+        <td class="center v5">2774</td>
+      </tr>
+      <tr>
+        <td>异地补贴</td>
+        <td class="center">0</td>
+        <td>个人所得税</td>
+        <td class="center v6">9554.81</td>
+      </tr>
+      <tr>
+        <td>通讯费</td>
+        <td class="center b3">150</td>
+        <td class="center"></td>
+        <td class="center"></td>
+      </tr>
+      <tr>
+        <td>项目奖金</td>
+        <td class="center">0</td>
+        <td class="bold yellow">其他扣减项目</td>
+        <td class="bold center yellow">金额</td>
+      </tr>
+      <tr>
+        <td>高温补贴</td>
+        <td class="center">0</td>
+        <td>病假扣款</td>
+        <td class="center">0</td>
+      </tr>
+      <tr>
+        <td>法定节日加班费</td>
+        <td class="center">0</td>
+        <td>事假扣款</td>
+        <td class="center">0</td>
+      </tr>
+      <tr>
+        <td>激励奖金</td>
+        <td class="center b4">7777.78</td>
+        <td>旷工扣款</td>
+        <td class="center">0</td>
+      </tr>
+      <tr>
+        <td>最低工资补款</td>
+        <td class="center">0</td>
+        <td>离职年假扣款</td>
+        <td class="center">0</td>
+      </tr>
+      <tr>
+        <td>其他税前调整</td>
+        <td class="center">0</td>
+        <td>税后代扣款</td>
+        <td class="center v7">-4300</td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <b>备注：</b>
+        </td>
+      </tr>
+
+
+    </table>
+  </div>
+
+  <script type="text/javascript">
+    let total = 0
+    for (let i = 1; i < 5; i++) {
+      total += parseFloat(document.querySelector('.b' + i).innerText || 0)
+    }
+    document.querySelector('.b0').innerText = total.toFixed(2);
+
+    let tax = 0
+    for (let i = 2; i < 8; i++) {
+      tax += Math.abs(parseFloat(document.querySelector('.v' + i).innerText || 0))
+    }
+    let v1 = document.querySelector('.v1').innerText || 0
+    document.querySelector('.v0').innerText = (v1 - tax).toFixed(2);
+  </script>
+</body>
+
+</html>

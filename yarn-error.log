@@ -1,0 +1,61 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/linxi/work/workspace/consul:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/Users/linxi/opt/anaconda3/bin:/Users/linxi/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/linxi/work/workspace/consul:/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/bin:/opt/package/hadoop-2.6.5/bin:/Users/linxi/work/dev/flutter/bin:/Users/linxi/work/dev/nuclio:/Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/bin:/opt/package/hadoop-2.6.5/bin:/Users/linxi/work/dev/flutter/bin:/Users/linxi/work/dev/nuclio:/usr/local/go/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  14.4.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: write EPROTO 4579397056:error:14094417:SSL routines:ssl3_read_bytes:sslv3 alert illegal parameter:../deps/openssl/openssl/ssl/record/rec_layer_s3.c:1544:SSL alert number 47
+  
+      at WriteWrap.onWriteComplete [as oncomplete] (internal/stream_base_commons.js:92:16)
+
+npm manifest: 
+  {
+    "name": "algorithm",
+    "version": "1.0.0",
+    "description": "algorithm",
+    "main": "index.js",
+    "scripts": {
+      "dev": "rimraf ./dist/* && node build/dev.js",
+      "build": "rimraf ./dist/* && node build/build.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/lin-xi/algorithm.git"
+    },
+    "keywords": [
+      "algorithm"
+    ],
+    "author": "lin-xi",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/lin-xi/algorithm/issues"
+    },
+    "homepage": "https://github.com/lin-xi/algorithm#readme",
+    "devDependencies": {
+      "babel-core": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "babel-register": "^6.26.0",
+      "bs-platform": "^2.2.3",
+      "less": "^3.0.1",
+      "opn": "^5.3.0",
+      "parcel-bundler": "^1.7.0",
+      "rimraf": "^2.6.2",
+      "typescript": "^2.8.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
