@@ -12,7 +12,7 @@ function selectionSort(arr: Array<number>): [Array<number>, number] {
       cnt++;
     }
     [arr[i], arr[index]] = [arr[index], arr[i]];
-    step(arr); //显示日志
+    step(arr, i, index); //显示日志
     cnt++;
   }
   return [arr, cnt];

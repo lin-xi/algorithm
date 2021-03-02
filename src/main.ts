@@ -1,6 +1,7 @@
 import './index.less'
 import { bubbleSort } from "./algorithm/bubbleSort"
 import { selectionSort } from "./algorithm/selectionSort"
+import { insertSort } from "./algorithm/insertSort"
 
 let source = [];
 const NUM = 6;
@@ -18,6 +19,9 @@ document.querySelector('#menu').addEventListener('click', (e) => {
       break;
     case "selectionSort":
       displayResult(...selectionSort(copy));
+      break;
+    case "insertSort":
+      displayResult(...insertSort(copy));
       break;
   }
 

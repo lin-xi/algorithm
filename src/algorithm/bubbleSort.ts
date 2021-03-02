@@ -7,7 +7,7 @@ function bubbleSort(arr: Array<number>): [Array<number>, number] {
     for (let j: number = 0; j < i; j++) {
       if (arr[j] > arr[j + 1]) {
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-        step(arr); //显示日志
+        step(arr, j, j + 1); //显示日志
       }
       cnt++;
     }

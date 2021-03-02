@@ -43,6 +43,9 @@ h3 {
   margin: 5px;
   background: #ddd;
 }
+#app .right .array-item.active {
+  background-color: #e6e645;
+}
 #app .right .source {
   padding: 10px;
   display: flex;

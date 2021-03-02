@@ -194,10 +194,19 @@ module.hot.accept(reloadCSS);
 
 exports.__esModule = true;
 
-function step(arr) {
+function step(arr, i, j) {
+  if (i === void 0) {
+    i = -1;
+  }
+
+  if (j === void 0) {
+    j = -1;
+  }
+
   var dom = document.querySelector(".process");
-  var htmls = arr.map(function (ele) {
-    return "<span class=\"array-item\">" + ele + "</span>";
+  var htmls = arr.map(function (ele, idx) {
+    var clas = idx == i || idx == j ? "array-item active" : "array-item";
+    return "<span class=\"" + clas + "\">" + ele + "</span>";
   });
   dom.innerHTML += "<div class=\"log\">" + htmls.join("") + "</div>";
   document.querySelector(".exchange").innerHTML = "交换次数" + document.querySelectorAll(".log").length;
@@ -220,7 +229,7 @@ function bubbleSort(arr) {
     for (var j = 0; j < i; j++) {
       if (arr[j] > arr[j + 1]) {
         _a = [arr[j + 1], arr[j]], arr[j] = _a[0], arr[j + 1] = _a[1];
-        util_1.step(arr); //显示日志
+        util_1.step(arr, j, j + 1); //显示日志
       }
 
       cnt++;
@@ -257,7 +266,7 @@ function selectionSort(arr) {
     }
 
     _a = [arr[index], arr[i]], arr[i] = _a[0], arr[index] = _a[1];
-    util_1.step(arr); //显示日志
+    util_1.step(arr, i, index); //显示日志
 
     cnt++;
   }
@@ -266,6 +275,39 @@ function selectionSort(arr) {
 }
 
 exports.selectionSort = selectionSort;
+},{"./util":"algorithm/util.ts"}],"algorithm/insertSort.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var util_1 = require("./util");
+
+function insertSort(arr) {
+  var cnt = 0;
+
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] < arr[i - 1]) {
+      var index = 0;
+
+      for (var j = i - 1; j >= 0; j--) {
+        cnt++;
+
+        if (arr[j] < arr[i]) {
+          index = j + 1;
+          break;
+        }
+      }
+
+      util_1.step(arr, index, i);
+      var ele = arr.splice(i, 1);
+      arr.splice(index, 0, ele[0]);
+    }
+  }
+
+  return [arr, cnt];
+}
+
+exports.insertSort = insertSort;
 },{"./util":"algorithm/util.ts"}],"main.ts":[function(require,module,exports) {
 "use strict";
 
@@ -276,6 +318,8 @@ require("./index.less");
 var bubbleSort_1 = require("./algorithm/bubbleSort");
 
 var selectionSort_1 = require("./algorithm/selectionSort");
+
+var insertSort_1 = require("./algorithm/insertSort");
 
 var source = [];
 var NUM = 6;
@@ -293,6 +337,10 @@ document.querySelector('#menu').addEventListener('click', function (e) {
 
     case "selectionSort":
       displayResult.apply(void 0, selectionSort_1.selectionSort(copy));
+      break;
+
+    case "insertSort":
+      displayResult.apply(void 0, insertSort_1.insertSort(copy));
       break;
   }
 });
@@ -330,7 +378,7 @@ function init() {
 }
 
 init();
-},{"./index.less":"index.less","./algorithm/bubbleSort":"algorithm/bubbleSort.ts","./algorithm/selectionSort":"algorithm/selectionSort.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./index.less":"index.less","./algorithm/bubbleSort":"algorithm/bubbleSort.ts","./algorithm/selectionSort":"algorithm/selectionSort.ts","./algorithm/insertSort":"algorithm/insertSort.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -358,7 +406,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56104" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62421" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
