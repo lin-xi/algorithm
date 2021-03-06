@@ -308,6 +308,103 @@ function insertSort(arr) {
 }
 
 exports.insertSort = insertSort;
+},{"./util":"algorithm/util.ts"}],"algorithm/shellSort.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var util_1 = require("./util");
+
+function shellSort(arr) {
+  var _a;
+
+  var cnt = 0;
+  var len = arr.length;
+
+  for (var gap = Math.ceil(arr.length / 2); gap >= 1; gap = gap == 1 ? 0 : Math.ceil(gap / 2)) {
+    for (var i = 0; i < gap; i++) {
+      for (var j = i; j < len - gap; j += gap) {
+        cnt++;
+        var next = j + gap;
+
+        if (arr[j] > arr[next]) {
+          util_1.step(arr, j, next);
+          _a = [arr[next], arr[j]], arr[j] = _a[0], arr[next] = _a[1];
+        }
+      }
+    }
+  }
+
+  return [arr, cnt];
+}
+
+exports.shellSort = shellSort;
+},{"./util":"algorithm/util.ts"}],"algorithm/mergeSort.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var util_1 = require("./util");
+
+function mergeSort(arr) {
+  return [mergeArray(arr), 0];
+}
+
+exports.mergeSort = mergeSort;
+
+function mergeArray(arr) {
+  if (arr.length == 1) {
+    return arr;
+  } else {
+    var middle = Math.floor(arr.length / 2);
+    var left = arr.slice(0, middle);
+    var right = arr.slice(middle);
+    util_1.step(arr, middle);
+    return merge(mergeArray(left), mergeArray(right));
+  }
+}
+
+function merge(left, right) {
+  var i = 0;
+  var j = 0;
+  var temp = [];
+
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      temp.push(left[i]);
+      i++;
+    } else {
+      temp.push(right[j]);
+      j++;
+    }
+  }
+
+  for (var m = i; m < left.length; m++) {
+    temp.push(left[m]);
+  }
+
+  for (var n = j; n < right.length; n++) {
+    temp.push(right[n]);
+  }
+
+  return temp;
+}
+
+function mergeSort2(arr) {
+  var cnt = 0;
+  var result = [];
+
+  if (arr.length < 2) {
+    return arr;
+  } else {
+    var middle = Math.floor(arr.length / 2);
+    var left = arr.slice(0, middle);
+    var right = arr.slice(middle);
+    result = merge(mergeSort2(left), mergeSort2(right));
+    console.log(result);
+    return result;
+  }
+}
 },{"./util":"algorithm/util.ts"}],"main.ts":[function(require,module,exports) {
 "use strict";
 
@@ -321,26 +418,39 @@ var selectionSort_1 = require("./algorithm/selectionSort");
 
 var insertSort_1 = require("./algorithm/insertSort");
 
+var shellSort_1 = require("./algorithm/shellSort");
+
+var mergeSort_1 = require("./algorithm/mergeSort");
+
 var source = [];
 var NUM = 6;
 document.querySelector('#menu').addEventListener('click', function (e) {
   var tar = e.target;
   var href = tar.getAttribute('href');
-  console.log("算法：", href);
+  document.querySelector(".algo").innerHTML = tar.innerHTML;
   document.querySelector(".process").innerHTML = "";
   var copy = source.slice(0);
+  var start = Date.now();
 
   switch (href) {
     case "bubbleSort":
-      displayResult.apply(void 0, bubbleSort_1.bubbleSort(copy));
+      displayResult.apply(void 0, bubbleSort_1.bubbleSort(copy).concat([start]));
       break;
 
     case "selectionSort":
-      displayResult.apply(void 0, selectionSort_1.selectionSort(copy));
+      displayResult.apply(void 0, selectionSort_1.selectionSort(copy).concat([start]));
       break;
 
     case "insertSort":
-      displayResult.apply(void 0, insertSort_1.insertSort(copy));
+      displayResult.apply(void 0, insertSort_1.insertSort(copy).concat([start]));
+      break;
+
+    case "shellSort":
+      displayResult.apply(void 0, shellSort_1.shellSort(copy).concat([start]));
+      break;
+
+    case "mergeSort":
+      displayResult.apply(void 0, mergeSort_1.mergeSort(copy).concat([start]));
       break;
   }
 });
@@ -365,12 +475,13 @@ function displayArray(arr, dom, append) {
   }
 }
 
-function displayResult(arr, count) {
+function displayResult(arr, count, start) {
   var dom = document.querySelector(".output");
   var htmls = arr.map(function (ele) {
     return "<span class=\"array-item\">" + ele + "</span>";
   });
-  dom.innerHTML = htmls.join("") + ("<div>\u5FAA\u73AF\u6B21\u6570\uFF1A" + count + "</div>");
+  var delta = console.timeEnd("algotime");
+  dom.innerHTML = htmls.join("") + ("<h3>\u5FAA\u73AF\u6B21\u6570\uFF1A" + count + "</h3>") + ("<h3>\u8017\u65F6\uFF1A" + (Date.now() - start) + "</h3>");
 }
 
 function init() {
@@ -378,7 +489,7 @@ function init() {
 }
 
 init();
-},{"./index.less":"index.less","./algorithm/bubbleSort":"algorithm/bubbleSort.ts","./algorithm/selectionSort":"algorithm/selectionSort.ts","./algorithm/insertSort":"algorithm/insertSort.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./index.less":"index.less","./algorithm/bubbleSort":"algorithm/bubbleSort.ts","./algorithm/selectionSort":"algorithm/selectionSort.ts","./algorithm/insertSort":"algorithm/insertSort.ts","./algorithm/shellSort":"algorithm/shellSort.ts","./algorithm/mergeSort":"algorithm/mergeSort.ts"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -406,7 +517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62421" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64780" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,22 +1,21 @@
+import { step } from "./util";
+
 function shellSort(arr: Array<number>): [Array<number>, number] {
   let cnt: number = 0;
   let len = arr.length;
-
-  let gap = Math.floor(arr.length / 2)
-  while (gap > 0) {
+  for (let gap = Math.ceil(arr.length / 2); gap >= 1; gap = (gap == 1 ? 0 : Math.ceil(gap / 2))) {
     for (let i: number = 0; i < gap; i++) {
-      cnt++
-
-      let j = i;
-      while (j >= 0 && arr[j] < arr[j - 1]) {
+      for (let j: number = i; j < len - gap; j += gap) {
         cnt++
-        [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]]
-        j -= gap
+        let next = j + gap;
+        if (arr[j] > arr[next]) {
+          step(arr, j, next);
+          [arr[j], arr[next]] = [arr[next], arr[j]]
+        }
       }
     }
-    gap = Math.floor(gap / 2)
   }
   return [arr, cnt]
 }
 
-window['shellSort'] = shellSort
+export { shellSort };
