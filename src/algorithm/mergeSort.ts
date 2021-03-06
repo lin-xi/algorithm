@@ -38,20 +38,4 @@ function merge(left: Array<number>, right: Array<number>): Array<number> {
   return temp;
 }
 
-function mergeSort2(arr: Array<number>): Array<number> {
-  let cnt: number = 0
-  let result: Array<number> = []
-
-  if (arr.length < 2) {
-    return arr
-  } else {
-    let middle = Math.floor(arr.length / 2)
-    let left: Array<number> = arr.slice(0, middle)
-    let right: Array<number> = arr.slice(middle)
-    result = merge(mergeSort2(left), mergeSort2(right))
-    console.log(result)
-    return result
-  }
-}
-
 export { mergeSort }
